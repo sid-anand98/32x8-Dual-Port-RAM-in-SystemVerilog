@@ -1,0 +1,43 @@
+class monitor_out;
+  int no_of_pkts_recvd;
+  packet pkt;
+  
+  virtual ram_interface.OMON vif;
+  mailbox #(packet) mbox; 
+  /*
+  covergroup ram_omon_cg;
+    cp_DATA_OUT: covergroup pkt.data_out {bins b_data_out ={[0:255]};}
+    endgroup
+    */
+  
+    function new (input mailbox #(packet) mbox_in,
+                  input virtual ram_interface.OMON vif_in
+                 );
+    mbox = mbox_in;
+    vif = vif_in;
+    if(this.vif==null)
+      $display("[OUTPUT-MONITOR] Interface handle not set");
+    //ram_omon_cg=new();
+    endfunction
+    
+    task run();
+      $display("@%0t [OUTPUT-MONITOR] RUN STARTED\n",$time);
+      @(vif.omon_cb);
+    while(1)
+      begin
+        @(vif.omon_cb);
+        pkt=new;
+        pkt.addr = vif.omon_cb.addr;
+        pkt.data_out = vif.omon_cb.data_out;
+        if(vif.omon_cb.addr!==5'dx)
+          no_of_pkts_recvd++;
+        $display("@%0t [OUTPUT-MONITOR] Packet_no=%0d to SCB with addr=%0d, data=%0d",$time,no_of_pkts_recvd,vif.omon_cb.addr,vif.omon_cb.data_out);
+        mbox.put(pkt);
+        //ram_omon_cg.sample(); //sampling cg
+      end
+      
+      $display("@%0t [OUTPUT-MONITOR] RUN CONCLUDED",$time);
+    endtask
+endclass
+        
+    
