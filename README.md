@@ -6,4 +6,6 @@ The project was built using SystemVerilog to demonstrate the RAM's operation, wh
 Code for execution - 
 https://www.edaplayground.com/x/gw_A
 
+
+Architecture -
 ![RAM Architecture](https://github.com/sid-anand98/32x8-Dual-Port-RAM-in-SystemVerilog/assets/136684632/4f6bd1de-3120-441b-8c0c-27486de02db9)
