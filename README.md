@@ -5,3 +5,4 @@ The project was built using SystemVerilog to demonstrate the RAM's operation, wh
 
 Code for execution - 
 https://www.edaplayground.com/x/gw_A
+![RAM Architecture](https://github.com/sid-anand98/32x8-Dual-Port-RAM-in-SystemVerilog/assets/136684632/4772f492-006a-4ebc-aa15-49529039b91a)
